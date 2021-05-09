@@ -1,0 +1,69 @@
+<div style="overflow:auto; box-sizing: border-box; width: 50%; float: left; padding: 10px">
+    {{#each burgers}}
+    {{#unless devoured}}
+    <div>
+        <button type="button" class="btn btn-primary devour-it" style="float: right; margin-top: 15px"
+            data-burgerid="{{id}}">Devour It!</button>
+        <textarea name="burgerName" id="id" cols="60" rows="2"
+            style="float: right; margin: 5px">{{id}}. {{burger_name}}</textarea>
+    </div>
+    <br style="clear:both" />
+    {{/unless}}
+    {{/each}}
+</div>
+
+<div style="overflow:auto; box-sizing: border-box; width: 50%; float: left; padding: 10px">
+    {{#each burgers}}
+    {{#if devoured}}
+    <div>
+        <input type="text" value="{{id}}. {{burger_name}}" style="width: 300px; margin: 5px" disabled>
+    </div>
+    <br>
+    {{/if}}
+    {{/each}}
+</div>
+
+<br style="clear:both" />
+<div>
+    <form id="addBurger" class="button-size">
+        <textarea type="text" cols="40" rows="3" name="newBurger" class="center"
+            style="margin-bottom: 10px;"></textarea>
+        <button type="submit" class="btn btn-success center" style="margin-bottom: 10px;">Submit</button>
+    </form>
+    <p style="text-align: center">Enter a burger you want to eat, then click the "Submit" button</p>
+</div>
+
+<script type="text/javascript">
+    $(".devour-it").on("click", function (event) {
+        const id = $(this).data("burgerid");
+        let devouredBurger = {
+            id: id,
+            devoured: 1
+        }
+
+        $.ajax("/api/burger/" + id, {
+            type: "PUT",
+            data: devouredBurger
+        }).then(function () {
+            console.log("devoured burger with id: " + id);
+            location.reload()
+        });
+    });
+
+    $("#addBurger").on("submit", function (event) {
+        //handling this ourselves so need prevent default
+        event.preventDefault();
+
+        let newBurger = {
+            burger_name: $("#addBurger [name=newBurger]").val().trim()
+        }
+
+        $.ajax("/api/burger", {
+            type: "POST",
+            data: newBurger
+        }).then(function () {
+            console.log("added new burger");
+            location.reload();
+        });
+    });
+</script>
