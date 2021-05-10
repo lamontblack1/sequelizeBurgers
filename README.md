@@ -1,6 +1,6 @@
 # [Eat-Da-Burger](https://serene-plateau-22134.herokuapp.com/)
 
-This is my first fully deployed app with the database server side. The great majority of it was coded by typing from scratch.
+This is my first fully deployed app making use of both sequelize and the database server side.
 
 # Why this project is useful
 This is useful because the code demonstrates use of sequelize server-side. It is the result of switching from a controller and ORM structure to using sequelize and routes to administer queries, receive responses and render these using handlebars to the user. While this application makes limited use of these technologies, it shows the nearly unlimited potential and flexibility that could be exploited. 
