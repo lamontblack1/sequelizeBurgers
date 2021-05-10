@@ -1,11 +1,11 @@
 module.exports = function (sequelize, DataTypes) {
     const Burger = sequelize.define("Burger", {
         burger_name: {
-            DataTypes.STRING,
+            type: DataTypes.STRING,
             allowNull: false
         },
         devoured: {
-            DataTypes.BOOLEAN,
+            type: DataTypes.BOOLEAN,
             defaultValue: false
         }
     });

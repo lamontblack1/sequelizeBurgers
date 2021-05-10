@@ -1,11 +1,11 @@
 <div style="overflow:auto; box-sizing: border-box; width: 50%; float: left; padding: 10px">
-    {{#each burgers}}
-    {{#unless devoured}}
+    {{#each dbBurger}}
+    {{#unless dataValues.devoured}}
     <div>
         <button type="button" class="btn btn-primary devour-it" style="float: right; margin-top: 15px"
-            data-burgerid="{{id}}">Devour It!</button>
+            data-burgerid="{{dataValues.id}}">Devour It!</button>
         <textarea name="burgerName" id="id" cols="60" rows="2"
-            style="float: right; margin: 5px">{{id}}. {{burger_name}}</textarea>
+            style="float: right; margin: 5px">{{dataValues.id}}. {{dataValues.burger_name}}</textarea>
     </div>
     <br style="clear:both" />
     {{/unless}}
@@ -13,10 +13,11 @@
 </div>
 
 <div style="overflow:auto; box-sizing: border-box; width: 50%; float: left; padding: 10px">
-    {{#each burgers}}
-    {{#if devoured}}
+    {{#each dbBurger}}
+    {{#if dataValues.devoured}}
     <div>
-        <input type="text" value="{{id}}. {{burger_name}}" style="width: 300px; margin: 5px" disabled>
+        <input type="text" value="{{dataValues.id}}. {{dataValues.burger_name}}" style="width: 300px; margin: 5px"
+            disabled>
     </div>
     <br>
     {{/if}}
@@ -34,6 +35,7 @@
 </div>
 
 <script type="text/javascript">
+
     $(".devour-it").on("click", function (event) {
         const id = $(this).data("burgerid");
         let devouredBurger = {
